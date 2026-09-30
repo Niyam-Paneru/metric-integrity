@@ -113,10 +113,11 @@ invented one looks measured.
 
 ## Provenance
 
-A sanitised extract from private call-analytics work in a healthcare scheduling
-product. Client names, figures and endpoints are removed. The denominator rules,
-the basis labelling and the refusal-to-attribute behaviour are the real
-implementation.
+A standalone public proof derived from reporting and attribution problems
+encountered in private call-analytics work: denominator choice, measured versus
+modelled labels, and refusing unsupported attribution. Client names, figures,
+and endpoints are removed. The public types are intentionally simplified for
+review rather than copied wholesale from the private product.
 
 The full system is not public.
 
