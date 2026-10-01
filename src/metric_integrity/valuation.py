@@ -11,7 +11,7 @@ def recovered_value() -> Figure:
         Basis.UNAVAILABLE,
         "Recovered revenue attributed to recovered calls",
         population="later bookings attributable to recovered calls",
-        quoteable=False,
+        quotable=False,
         quote_reason="missing durable attribution join",
     )
 
@@ -24,7 +24,7 @@ def modelled_value(calls: Sequence[Call], per_booking_value: float) -> Figure:
             Basis.UNAVAILABLE,
             "Modelled value of booked calls",
             population=population,
-            quoteable=False,
+            quotable=False,
             quote_reason="positive per-booking assumption required",
         )
 
@@ -38,6 +38,6 @@ def modelled_value(calls: Sequence[Call], per_booking_value: float) -> Figure:
         Basis.MODELLED,
         "Modelled value of booked calls",
         population=population,
-        quoteable=False,
+        quotable=False,
         quote_reason="value uses a configured per-booking assumption",
     )
