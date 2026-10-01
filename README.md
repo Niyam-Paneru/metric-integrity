@@ -1,11 +1,11 @@
 # metric-integrity
 
-**Denominator-safe reporting. Figures that carry their basis, and attribution that is refused rather than invented.**
+**Denominator-safe reporting. Figures that carry their basis, and attribution that is refused rather than invented.**\n\n**If a percentage cannot tell me what it is divided by, it is going back to math class.**
 
 A dashboard is an argument about reality made with arithmetic. Most misleading
 dashboards are not lying — they are dividing by the wrong thing.
 
-![Architecture: call records are split by whether they expressed booking intent. Each rate names its denominator. Every figure carries a basis label, and only measured figures may be quoted.](docs/architecture.svg)
+```text\nmeasured count / named denominator -> labelled figure\nassumption * measured count         -> MODELLED, not magically measured\nmissing attribution join            -> NOT AVAILABLE\n```
 
 ```bash
 pip install pytest
