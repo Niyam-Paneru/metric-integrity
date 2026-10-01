@@ -22,7 +22,7 @@ def modelled_value(calls: Sequence[Call], per_booking_value: float) -> Figure:
         return Figure(
             None,
             Basis.UNAVAILABLE,
-            "Modelled value of recovered bookings",
+            "Modelled value of booked calls",
             population=population,
             quoteable=False,
             quote_reason="positive per-booking assumption required",
@@ -36,7 +36,7 @@ def modelled_value(calls: Sequence[Call], per_booking_value: float) -> Figure:
     return Figure(
         round(booked * per_booking_value, 2),
         Basis.MODELLED,
-        "Modelled value of recovered bookings",
+        "Modelled value of booked calls",
         population=population,
         quoteable=False,
         quote_reason="value uses a configured per-booking assumption",
