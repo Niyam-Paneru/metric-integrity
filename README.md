@@ -1,58 +1,60 @@
 # Metric Integrity
 
-**If a percentage cannot tell me what it is divided by, it is going back to math class.**
+A small Python example for keeping a metric's lineage attached to the number: the population it describes, the calculation that produced it, the evidence basis, and whether the result is safe to quote.
 
-This repo is about making dashboard numbers carry their meaning with them.
+The failure this prevents is simple: correct arithmetic can still support the wrong business sentence. A measured number can use the wrong denominator, a modelled value can be formatted until it looks observed, and an attribution claim can be impossible because the data has no durable join.
 
-A figure here knows:
+![Metric lineage](docs/workflow.svg)
 
-- its value;
-- its basis: measured, modelled, or unavailable;
-- what population its rate is about;
-- whether it is safe to quote.
+## One sample, four different claims
 
-![Metric workflow](docs/workflow.svg)
+The demo uses **34 synthetic calls**: 14 express booking intent and 4 book. That produces two arithmetically valid rates, but only one answers the booking-intent success question.
 
-## The three bugs this avoids
+```text
+Booking rate vs calls expressing booking intent
+  value: 28.6%
+  population: calls expressing booking intent
+  calculation: 4 / 14
+  basis: measured
+  quote: yes
 
-### Wrong denominator
+Booking rate vs all calls
+  value: 11.8%
+  population: all calls
+  calculation: 4 / 34
+  basis: measured
+  quote: no
+  reason: denominator does not match the booking-intent success claim
+```
 
-Four bookings divided by booking-intent calls and four bookings divided by every call are both valid arithmetic.
+The same run also keeps a **4,800** treatment-value calculation labelled `modelled`, while recovered revenue is `not available` because there is no durable attribution join. `unavailable` means the evidence needed for the claim does not exist; it is not a substitute for a low estimate.
 
-They are not the same business claim.
+## Where the behavior lives
 
-### Modelled becomes “real” through formatting
-
-A configured assumption multiplied by a real count is still a modelled estimate.
-
-### Unsupported attribution gets invented
-
-If the data has no durable join proving which later booking came from which earlier call, the honest result is **unavailable**.
-
-## Repo map
-
-| Area | Responsibility |
+| File | What to inspect |
 |---|---|
-| `models.py` | basis, denominator, figures, call records |
-| `rates.py` | named populations + denominator-aware rates |
-| `valuation.py` | modelled values + attribution refusal |
-| `report.py` | compose the public report and limitations |
-| `tests/` | basis, denominator, attribution behavior |
-| `docs/` | design reasoning |
+| `src/metric_integrity/models.py` | `Figure`: value, population, calculation inputs, basis, and quote decision |
+| `src/metric_integrity/rates.py` | named denominator populations and rate construction |
+| `src/metric_integrity/valuation.py` | modelled value and explicit attribution refusal |
+| `src/metric_integrity/report.py` | report composition and limitations |
+| `src/metric_integrity/demo.py` | runnable lineage walkthrough |
+| `tests/` | denominator, basis, quote-safety, attribution, and unavailable-state checks |
 
-This is deliberately small. It is easier to audit one boring number pipeline than a dashboard full of decorative certainty.
+## Run it
 
-Want to inspect the number before trusting the chart? Read the [invariants](docs/invariants.md), [failure modes](docs/failure-modes.md), [design decisions](docs/decisions.md), and [provenance](PROVENANCE.md).
+```bash
+python -m pytest
+PYTHONPATH=src python -m metric_integrity.demo
+python -m compileall -q src
+```
 
-> Multiplication does not upgrade an assumption into a fact.
+CircleCI runs those checks plus proof-file existence checks from `.circleci/config.yml`.
 
-## Inspect deeper
+## Evidence boundary
 
-- [Design overview](docs/overview.md)
-- [Why the design looks this way](docs/decisions.md)
-- [Invariants that must survive refactors](docs/invariants.md)
-- [How it fails on purpose](docs/failure-modes.md)
-- [Security / privacy boundary](SECURITY.md)
-- [Where this public slice came from](PROVENANCE.md)
+- The records are synthetic; these are not customer or revenue results.
+- `measured` describes how a value was obtained. It does **not** automatically mean the value is safe to quote for every claim.
+- `modelled` means an assumption participates in the calculation.
+- `unavailable` means the required evidence is missing, such as a durable attribution join.
 
-The README is the front door. The interesting arguments are in those files.
+See [PROVENANCE.md](PROVENANCE.md) for the public/private boundary and [docs/invariants.md](docs/invariants.md) for the rules the tests protect.
