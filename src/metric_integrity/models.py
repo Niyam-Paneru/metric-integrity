@@ -89,4 +89,3 @@ class Figure:
 class Call:
     outcome: CallOutcome
     intent_flagged: bool
-    treatment_value: float | None = None
