@@ -26,13 +26,26 @@ class Figure:
     value: float | None
     basis: Basis
     label: str
+    display: str = "number"
+
+    def __post_init__(self) -> None:
+        if self.display not in {"number", "rate"}:
+            raise ValueError("unsupported_figure_display")
+
+    def _formatted_value(self) -> str:
+        if self.value is None:
+            return "not available"
+        if self.display == "rate":
+            return f"{self.value:.1%}"
+        return f"{self.value:,.0f}"
 
     def __str__(self) -> str:
         if self.value is None or self.basis is Basis.UNAVAILABLE:
             return f"{self.label}: not available ({self.basis.value})"
+        value = self._formatted_value()
         if self.basis is Basis.MODELLED:
-            return f"{self.label}: {self.value:,.0f} (modelled estimate, not measured)"
-        return f"{self.label}: {self.value:,.0f} (measured)"
+            return f"{self.label}: {value} (modelled estimate, not measured)"
+        return f"{self.label}: {value} (measured)"
 
     @property
     def safe_to_quote(self) -> bool:
