@@ -45,3 +45,12 @@ This is deliberately small. It is easier to audit one boring number pipeline tha
 Want to inspect the number before trusting the chart? Read the [invariants](docs/invariants.md), [failure modes](docs/failure-modes.md), [design decisions](docs/decisions.md), and [provenance](PROVENANCE.md).
 
 > Multiplication does not upgrade an assumption into a fact.
+
+## Inspect deeper
+
+- [Design overview](docs/overview.md)
+- [Why the design looks this way](docs/decisions.md)
+- [How it fails on purpose](docs/failure-modes.md)
+- [Security / privacy boundary](SECURITY.md)
+
+The README is the front door. The interesting arguments are in those files.
