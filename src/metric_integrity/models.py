@@ -30,7 +30,7 @@ class Figure:
     population: str | None = None
     numerator: int | None = None
     denominator: int | None = None
-    quoteable: bool | None = None
+    quotable: bool | None = None
     quote_reason: str | None = None
 
     def __post_init__(self) -> None:
@@ -44,7 +44,7 @@ class Figure:
             raise ValueError("denominator_requires_numerator")
         if self.numerator is not None and self.numerator < 0:
             raise ValueError("numerator_must_be_non_negative")
-        if self.quoteable is True and (self.basis is not Basis.MEASURED or self.value is None):
+        if self.quotable is True and (self.basis is not Basis.MEASURED or self.value is None):
             raise ValueError("unsafe_quote_configuration")
 
     def formatted_value(self) -> str:
@@ -68,9 +68,9 @@ class Figure:
     @property
     def safe_to_quote(self) -> bool:
         default = self.basis is Basis.MEASURED and self.value is not None
-        if self.quoteable is None:
+        if self.quotable is None:
             return default
-        return self.quoteable and default
+        return self.quotable and default
 
     def lineage_lines(self) -> tuple[str, ...]:
         lines: list[str] = []
