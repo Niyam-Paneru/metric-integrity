@@ -34,7 +34,9 @@ If the data has no durable join proving which later booking came from which earl
 | Area | Responsibility |
 |---|---|
 | `models.py` | basis, denominator, figures, call records |
-| `report.py` | denominator-aware calculations + limitations |
+| `rates.py` | named populations + denominator-aware rates |
+| `valuation.py` | modelled values + attribution refusal |
+| `report.py` | compose the public report and limitations |
 | `tests/` | basis, denominator, attribution behavior |
 | `docs/` | design reasoning |
 
