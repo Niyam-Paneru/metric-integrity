@@ -1,17 +1,12 @@
 # Design overview
 
-A dashboard number has two pieces of meaning that should travel with it:
+A metric is treated as a small evidence object, not a bare number.
 
-1. **what population was used as the denominator;**
-2. **how the number came to exist.**
+For a rate, `Figure` carries:
 
-This repository keeps both visible.
+- the named population;
+- numerator and denominator counts;
+- the evidence basis (`measured`, `modelled`, or `unavailable`);
+- the quote decision and, when blocked, the reason.
 
-The public model separates:
-
-- call/figure types;
-- denominator choice;
-- measured vs modelled vs unavailable basis;
-- attribution limitations.
-
-The important behavior is refusal: if the data cannot support an attribution, the API returns an unavailable figure rather than inventing a smaller, more believable number.
+Those fields answer different questions. A value can be measured from real records and still be unsafe to quote for a specific claim because its population is wrong. Conversely, an attribution claim with no durable join is not merely "do not quote"; its value is explicitly unavailable.
