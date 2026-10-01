@@ -5,10 +5,10 @@ from metric_integrity import Basis, Call, CallOutcome, Denominator, Report
 
 def sample() -> list[Call]:
     return [
-        Call(CallOutcome.BOOKED, True, 1200.0),
-        Call(CallOutcome.BOOKED, True, 1200.0),
-        Call(CallOutcome.BOOKED, True, 1200.0),
-        Call(CallOutcome.BOOKED, True, 1200.0),
+        Call(CallOutcome.BOOKED, True),
+        Call(CallOutcome.BOOKED, True),
+        Call(CallOutcome.BOOKED, True),
+        Call(CallOutcome.BOOKED, True),
         Call(CallOutcome.NOT_BOOKING_INTENT, True),
         Call(CallOutcome.NOT_BOOKING_INTENT, True),
         Call(CallOutcome.NO_ANSWER, True),
