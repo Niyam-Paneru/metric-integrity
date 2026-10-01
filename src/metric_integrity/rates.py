@@ -40,6 +40,6 @@ def booking_rate(calls: Sequence[Call], denominator: Denominator) -> Figure:
         basis = Basis.MEASURED
 
     if base == 0:
-        return Figure(None, Basis.UNAVAILABLE, label)
+        return Figure(None, Basis.UNAVAILABLE, label, display="rate")
 
-    return Figure(round(booked / base, 4), basis, label)
+    return Figure(round(booked / base, 4), basis, label, display="rate")
