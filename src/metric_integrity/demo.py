@@ -8,7 +8,7 @@ from metric_integrity import Call, CallOutcome, Denominator, Figure, Report
 
 
 def sample() -> list[Call]:
-    calls: list[Call] = [Call(CallOutcome.BOOKED, True, 1200.0) for _ in range(4)]
+    calls: list[Call] = [Call(CallOutcome.BOOKED, True) for _ in range(4)]
     calls += [Call(CallOutcome.NOT_BOOKING_INTENT, True) for _ in range(2)]
     calls += [Call(CallOutcome.NO_ANSWER, True) for _ in range(8)]
     calls += [Call(CallOutcome.NOT_BOOKING_INTENT, False) for _ in range(20)]
