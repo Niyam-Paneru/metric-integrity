@@ -70,6 +70,8 @@ def test_a_modelled_figure_never_becomes_quotable() -> None:
     assert figure.basis is Basis.MODELLED
     assert not figure.safe_to_quote
     assert "modelled estimate, not measured" in str(figure)
+    assert figure.label == "Modelled value of booked calls"
+    assert "recovered" not in figure.label.lower()
 
 
 def test_a_model_value_without_an_assumption_is_unavailable() -> None:
