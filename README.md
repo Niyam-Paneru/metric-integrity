@@ -40,4 +40,6 @@ If the data has no durable join proving which later booking came from which earl
 
 This is deliberately small. It is easier to audit one boring number pipeline than a dashboard full of decorative certainty.
 
+Want to inspect the number before trusting the chart? Read the [invariants](docs/invariants.md), [failure modes](docs/failure-modes.md), [design decisions](docs/decisions.md), and [provenance](PROVENANCE.md).
+
 > Multiplication does not upgrade an assumption into a fact.
