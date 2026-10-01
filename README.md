@@ -27,15 +27,17 @@ Booking rate vs all calls
   reason: denominator does not match the booking-intent success claim
 ```
 
-The same run also keeps a **4,800** treatment-value calculation labelled `modelled`, while recovered revenue is `not available` because there is no durable attribution join. `unavailable` means the evidence needed for the claim does not exist; it is not a substitute for a low estimate.
+The same run also shows a **4,800** value calculated from a separately configured **1,200 per-booking assumption**. It stays labelled `modelled`. The call records themselves do not carry a pretend observed revenue/value field.
+
+Recovered revenue is `not available` because there is no durable attribution join. `unavailable` means the evidence needed for the claim does not exist; it is not a substitute for a low estimate.
 
 ## Where the behavior lives
 
 | File | What to inspect |
 |---|---|
-| `src/metric_integrity/models.py` | `Figure`: value, population, calculation inputs, basis, and quote decision |
+| `src/metric_integrity/models.py` | `Figure`: value, population, calculation inputs, basis, and quote decision; `Call`: only outcome + intent evidence |
 | `src/metric_integrity/rates.py` | named denominator populations and rate construction |
-| `src/metric_integrity/valuation.py` | modelled value and explicit attribution refusal |
+| `src/metric_integrity/valuation.py` | configured modelled value and explicit attribution refusal |
 | `src/metric_integrity/report.py` | report composition and limitations |
 | `src/metric_integrity/demo.py` | runnable lineage walkthrough |
 | `tests/` | denominator, basis, quote-safety, attribution, and unavailable-state checks |
@@ -54,7 +56,7 @@ CircleCI runs those checks plus proof-file existence checks from `.circleci/conf
 
 - The records are synthetic; these are not customer or revenue results.
 - `measured` describes how a value was obtained. It does **not** automatically mean the value is safe to quote for every claim.
-- `modelled` means an assumption participates in the calculation.
+- `modelled` means a configured assumption participates in the calculation.
 - `unavailable` means the required evidence is missing, such as a durable attribution join.
 
 See [PROVENANCE.md](PROVENANCE.md) for the public/private boundary and [docs/invariants.md](docs/invariants.md) for the rules the tests protect.
