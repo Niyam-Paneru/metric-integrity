@@ -1,34 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="t d">
-<title id="t">Metric integrity architecture</title><desc id="d">Raw records feed a denominator choice and basis label before a figure may be published; unsupported attribution returns unavailable.</desc>
-<rect width="1200" height="520" fill="#f5f5f1"/>
-<text x="56" y="62" fill="#71716a" font-family="Arial,sans-serif" font-size="13" letter-spacing="3">METRIC INTEGRITY</text>
-<text x="56" y="105" fill="#171714" font-family="Georgia,serif" font-size="34">A number should carry its own footnotes.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">Metric lineage from records to quote decision</title>
+  <desc id="desc">Records become a named population, denominator, calculation, and evidence basis before a quote gate. Missing durable attribution evidence goes to unavailable.</desc>
+  <rect width="1200" height="500" fill="#f7f7f4"/>
 
-<rect x="58" y="180" width="175" height="90" rx="14" fill="#fff" stroke="#171714" stroke-width="2"/>
-<text x="80" y="210" fill="#71716a" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">DATA</text>
-<text x="80" y="241" fill="#171714" font-family="Arial,sans-serif" font-size="20" font-weight="700">call records</text>
+  <text x="60" y="58" fill="#111827" font-family="Arial, sans-serif" font-size="30" font-weight="700">Metric lineage</text>
+  <text x="60" y="88" fill="#6b7280" font-family="Arial, sans-serif" font-size="15">The number is the end of the chain, not the start.</text>
 
-<rect x="305" y="145" width="245" height="160" rx="16" fill="#fff" stroke="#171714" stroke-width="2"/>
-<text x="330" y="178" fill="#71716a" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">QUESTION</text>
-<text x="330" y="211" fill="#171714" font-family="Georgia,serif" font-size="24">What is divided by what?</text>
-<text x="330" y="248" fill="#4e4e48" font-family="Arial,sans-serif" font-size="14">all calls</text>
-<text x="330" y="274" fill="#4e4e48" font-family="Arial,sans-serif" font-size="14">booking-intent calls</text>
+  <g stroke="#9ca3af" stroke-width="2.5" fill="none">
+    <path d="M120 190 H1015"/>
+    <path d="M1015 190 H1100"/>
+    <path d="M1015 190 C1050 190 1050 260 1100 260"/>
+  </g>
+  <g fill="#6b7280">
+    <path d="M1092 184 l10 6 -10 6z"/>
+    <path d="M1092 254 l10 6 -10 6z"/>
+  </g>
 
-<rect x="625" y="145" width="235" height="160" rx="16" fill="#fff" stroke="#171714" stroke-width="2"/>
-<text x="650" y="178" fill="#71716a" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">BASIS</text>
-<text x="650" y="211" fill="#171714" font-family="Georgia,serif" font-size="24">How do we know it?</text>
-<text x="650" y="248" fill="#596e35" font-family="Arial,sans-serif" font-size="14">measured</text>
-<text x="730" y="248" fill="#a4243b" font-family="Arial,sans-serif" font-size="14">modelled</text>
-<text x="650" y="274" fill="#71716a" font-family="Arial,sans-serif" font-size="14">unavailable</text>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <g transform="translate(120 190)">
+      <circle r="25" fill="#111827"/>
+      <text y="6" fill="#ffffff" font-size="16" font-weight="700">1</text>
+      <text y="58" fill="#111827" font-size="14" font-weight="700">records</text>
+    </g>
+    <g transform="translate(300 190)">
+      <circle r="25" fill="#1f2937"/>
+      <text y="6" fill="#ffffff" font-size="16" font-weight="700">2</text>
+      <text y="58" fill="#111827" font-size="14" font-weight="700">named population</text>
+      <text y="80" fill="#6b7280" font-size="12">booking-intent calls</text>
+    </g>
+    <g transform="translate(480 190)">
+      <circle r="25" fill="#374151"/>
+      <text y="6" fill="#ffffff" font-size="16" font-weight="700">3</text>
+      <text y="58" fill="#111827" font-size="14" font-weight="700">denominator</text>
+      <text y="80" fill="#6b7280" font-size="12">14</text>
+    </g>
+    <g transform="translate(660 190)">
+      <circle r="25" fill="#4b5563"/>
+      <text y="6" fill="#ffffff" font-size="16" font-weight="700">4</text>
+      <text y="58" fill="#111827" font-size="14" font-weight="700">calculation</text>
+      <text y="80" fill="#6b7280" font-size="12">4 / 14 = 28.6%</text>
+    </g>
+    <g transform="translate(840 190)">
+      <circle r="25" fill="#5b6b4f"/>
+      <text y="6" fill="#ffffff" font-size="16" font-weight="700">5</text>
+      <text y="58" fill="#111827" font-size="14" font-weight="700">basis label</text>
+      <text y="80" fill="#5b6b4f" font-size="12">measured</text>
+    </g>
+    <g transform="translate(1015 190)">
+      <circle r="29" fill="#111827"/>
+      <text y="6" fill="#ffffff" font-size="14" font-weight="700">QUOTE?</text>
+    </g>
+  </g>
 
-<rect x="935" y="180" width="200" height="90" rx="14" fill="#e4edb0" stroke="#596e35" stroke-width="2"/>
-<text x="960" y="210" fill="#596e35" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">OUTPUT</text>
-<text x="960" y="241" fill="#171714" font-family="Arial,sans-serif" font-size="20" font-weight="700">labelled figure</text>
+  <text x="1085" y="174" fill="#3f6212" font-family="Arial, sans-serif" font-size="14" font-weight="700">QUOTE</text>
+  <text x="1085" y="244" fill="#991b1b" font-family="Arial, sans-serif" font-size="14" font-weight="700">DO NOT QUOTE</text>
+  <text x="1185" y="266" fill="#6b7280" font-family="Arial, sans-serif" font-size="11" text-anchor="end">wrong population / model</text>
 
-<g stroke="#171714" stroke-width="2" fill="none"><path d="M233 225 H305"/><path d="M550 225 H625"/><path d="M860 225 H935"/></g>
-<g fill="#171714"><path d="M297 219 l10 6 -10 6z"/><path d="M617 219 l10 6 -10 6z"/><path d="M927 219 l10 6 -10 6z"/></g>
+  <line x1="120" y1="355" x2="880" y2="355" stroke="#c4b5a5" stroke-width="2.5"/>
+  <path d="M872 349 l10 6 -10 6z" fill="#c4b5a5"/>
+  <g font-family="Arial, sans-serif">
+    <circle cx="120" cy="355" r="22" fill="#7f1d1d"/>
+    <text x="120" y="361" fill="#ffffff" font-size="14" font-weight="700" text-anchor="middle">A</text>
+    <text x="155" y="348" fill="#111827" font-size="14" font-weight="700">attribution claim requested</text>
+    <text x="155" y="369" fill="#6b7280" font-size="12">"recovered revenue from this call"</text>
 
-<rect x="305" y="365" width="555" height="70" rx="14" fill="#f1d9dc" stroke="#a4243b" stroke-width="2"/>
-<text x="330" y="394" fill="#a4243b" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">ATTRIBUTION WITHOUT A JOIN</text>
-<text x="330" y="420" fill="#171714" font-family="Georgia,serif" font-size="19">Return “unavailable.” Do not estimate around missing evidence.</text>
+    <circle cx="520" cy="355" r="22" fill="#991b1b"/>
+    <text x="520" y="361" fill="#ffffff" font-size="14" font-weight="700" text-anchor="middle">B</text>
+    <text x="555" y="348" fill="#111827" font-size="14" font-weight="700">durable join exists?</text>
+    <text x="555" y="369" fill="#991b1b" font-size="12">NO</text>
+
+    <circle cx="880" cy="355" r="22" fill="#b91c1c"/>
+    <text x="880" y="361" fill="#ffffff" font-size="14" font-weight="700" text-anchor="middle">C</text>
+    <text x="915" y="348" fill="#111827" font-size="14" font-weight="700">UNAVAILABLE</text>
+    <text x="915" y="369" fill="#6b7280" font-size="12">no invented number</text>
+  </g>
+
+  <text x="60" y="454" fill="#6b7280" font-family="Arial, sans-serif" font-size="12">Basis answers “how do we know?” Quote permission answers “does this support this claim?” They are not the same field.</text>
 </svg>
