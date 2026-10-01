@@ -31,15 +31,35 @@ def booking_rate(calls: Sequence[Call], denominator: Denominator) -> Figure:
     if denominator is Denominator.ALL_CALLS:
         base = len(calls)
         label = "Booking rate vs all calls"
-        # The arithmetic is observable, but this denominator is intentionally
-        # not endorsed as the booking-intent success claim.
-        basis = Basis.UNAVAILABLE
+        population = "all calls"
+        quoteable = False
+        quote_reason = "denominator does not match the booking-intent success claim"
     else:
         base = booking_intent_calls(calls)
         label = "Booking rate vs calls expressing booking intent"
-        basis = Basis.MEASURED
+        population = "calls expressing booking intent"
+        quoteable = True
+        quote_reason = None
 
     if base == 0:
-        return Figure(None, Basis.UNAVAILABLE, label, display="rate")
+        return Figure(
+            None,
+            Basis.UNAVAILABLE,
+            label,
+            display="rate",
+            population=population,
+            quoteable=False,
+            quote_reason="denominator population is empty",
+        )
 
-    return Figure(round(booked / base, 4), basis, label, display="rate")
+    return Figure(
+        round(booked / base, 4),
+        Basis.MEASURED,
+        label,
+        display="rate",
+        population=population,
+        numerator=booked,
+        denominator=base,
+        quoteable=quoteable,
+        quote_reason=quote_reason,
+    )
