@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 
-from .models import Basis, Call, CallOutcome, Denominator, Figure
+from .models import Call, Denominator, Figure
+from .rates import answered_booking_intent_calls, booked_calls, booking_intent_calls, booking_rate
+from .valuation import modelled_value, recovered_value
 
 
 class Report:
@@ -16,55 +18,25 @@ class Report:
 
     @property
     def booking_intent_calls(self) -> int:
-        return sum(1 for call in self._calls if call.intent_flagged)
+        return booking_intent_calls(self._calls)
 
     @property
     def answered_booking_intent_calls(self) -> int:
-        return sum(
-            1
-            for call in self._calls
-            if call.intent_flagged and call.outcome is not CallOutcome.NO_ANSWER
-        )
+        return answered_booking_intent_calls(self._calls)
 
     @property
     def booked_calls(self) -> int:
-        return sum(
-            1
-            for call in self._calls
-            if call.intent_flagged and call.outcome is CallOutcome.BOOKED
-        )
+        return booked_calls(self._calls)
 
     def booking_rate(self, denominator: Denominator) -> Figure:
-        if denominator is Denominator.ALL_CALLS:
-            base = self.total_calls
-            label = "Booking rate vs all calls"
-        else:
-            base = self.booking_intent_calls
-            label = "Booking rate vs calls expressing booking intent"
-
-        if base == 0:
-            return Figure(None, Basis.UNAVAILABLE, label)
-
-        value = round(self.booked_calls / base, 4)
-        basis = Basis.UNAVAILABLE if denominator is Denominator.ALL_CALLS else Basis.MEASURED
-        return Figure(value, basis, label)
+        return booking_rate(self._calls, denominator)
 
     def recovered_value(self) -> Figure:
-        return Figure(
-            None,
-            Basis.UNAVAILABLE,
-            "Recovered revenue attributed to recovered calls",
-        )
+        return recovered_value()
 
     def modelled_value(self, per_booking_value: float | None = None) -> Figure:
         unit = self._assumed_value if per_booking_value is None else per_booking_value
-        if unit <= 0:
-            return Figure(None, Basis.UNAVAILABLE, "Modelled value of recovered bookings")
-        return Figure(
-            round(self.booked_calls * unit, 2),
-            Basis.MODELLED,
-            "Modelled value of recovered bookings",
-        )
+        return modelled_value(self._calls, unit)
 
     def limitations(self) -> tuple[str, ...]:
         return (
