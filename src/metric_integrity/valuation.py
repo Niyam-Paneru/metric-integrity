@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
+from math import isfinite
 
 from .models import Basis, Call, CallOutcome, Figure
 
@@ -18,14 +19,14 @@ def recovered_value() -> Figure:
 
 def modelled_value(calls: Sequence[Call], per_booking_value: float) -> Figure:
     population = "booked calls expressing booking intent"
-    if per_booking_value <= 0:
+    if not isfinite(per_booking_value) or per_booking_value <= 0:
         return Figure(
             None,
             Basis.UNAVAILABLE,
             "Modelled value of booked calls",
             population=population,
             quotable=False,
-            quote_reason="positive per-booking assumption required",
+            quote_reason="positive finite per-booking assumption required",
         )
 
     booked = sum(

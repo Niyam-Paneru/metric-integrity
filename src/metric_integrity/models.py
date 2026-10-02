@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum
+from math import isfinite
 
 
 class Basis(str, Enum):
@@ -36,6 +37,8 @@ class Figure:
     def __post_init__(self) -> None:
         if self.display not in {"number", "rate"}:
             raise ValueError("unsupported_figure_display")
+        if self.value is not None and not isfinite(self.value):
+            raise ValueError("non_finite_figure_value")
         if self.basis is Basis.UNAVAILABLE and self.value is not None:
             raise ValueError("unavailable_figure_cannot_have_value")
         if self.denominator is not None and self.denominator <= 0:
