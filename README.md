@@ -8,14 +8,16 @@ This is a public sample of reporting rules from my private voice/booking analyti
 
 ## Measured rates: check the denominator before quoting
 
+The named denominator must be nonzero. The rate retains its calculation lineage and `measured` basis. For the booking-intent success claim, the booking-intent population is quotable; the all-call population is not.
+
 ```mermaid
-flowchart TB
-    P["<b>Choose named population</b>"] --> D{"Denominator nonzero?"}
-    D -- No --> U["<b>Unavailable</b><br/>value = None, not quotable"]
-    D -- Yes --> R["<b>Compute rate + lineage</b><br/>basis = measured"]
-    R --> Q{"Population fits<br/>the booking-intent claim?"}
-    Q -- Yes --> Y["<b>Quotable</b><br/>booking-intent population"]
-    Q -- No --> N["<b>Not quotable for that claim</b><br/>all-call population"]
+flowchart LR
+    P["<b>Population</b>"] --> D{"Nonzero?"}
+    D -- No --> U["<b>Unavailable</b><br/>None, not quotable"]
+    D -- Yes --> R["<b>Measured rate</b><br/>Keep lineage"]
+    R --> Q{"Booking intent?"}
+    Q -- Yes --> Y["<b>Quotable</b>"]
+    Q -- No --> N["<b>Not quotable</b><br/>For this claim"]
     classDef input fill:#e8e6df,stroke:#55534a,color:#20201d,stroke-width:2px;
     classDef pass fill:#d2e5d8,stroke:#38734d,color:#183923,stroke-width:2px;
     classDef stop fill:#f4dadd,stroke:#b14253,color:#611c29,stroke-width:2px;
@@ -26,13 +28,15 @@ flowchart TB
 
 ## Value estimates: expose the assumption or missing evidence
 
+Modelled value multiplies the measured booked count by a **positive, finite** configured per-booking assumption. It remains `modelled` and not quotable. Missing or invalid assumptions yield `unavailable`, with `value = None`. Attributed recovered revenue is also unavailable because this sample has no durable attribution join.
+
 ```mermaid
-flowchart TB
+flowchart LR
     V["<b>Value request</b>"] --> K{"Which value?"}
-    K -- Modelled bookings --> A{"Positive finite<br/>per-booking assumption?"}
-    A -- Yes --> M["<b>Modelled value</b><br/>booked count × assumption<br/>not quotable"]
-    A -- No --> U["<b>Unavailable</b><br/>value = None, not quotable"]
-    K -- Attributed recovered revenue --> J["<b>No durable attribution join</b><br/>in this sample"]
+    K -- Modelled --> A{"Valid assumption?"}
+    A -- Yes --> M["<b>Modelled</b><br/>Not quotable"]
+    A -- No --> U["<b>Unavailable</b><br/>None, not quotable"]
+    K -- Attributed --> J["<b>No join</b><br/>Attribution missing"]
     J --> U
     classDef input fill:#e8e6df,stroke:#55534a,color:#20201d,stroke-width:2px;
     classDef stop fill:#f4dadd,stroke:#b14253,color:#611c29,stroke-width:2px;
