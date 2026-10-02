@@ -2,23 +2,42 @@
 
 A small Python example for keeping a metric's lineage attached to the number: the population it describes, the calculation that produced it, the evidence basis, and whether the result is safe to quote.
 
-A percentage can be mathematically correct and still answer the wrong question. Decimal places are not a permission slip.
+**Decimal places are not a permission slip.**
+
+This is a public sample of reporting rules from my private voice/booking analytics work. Synthetic records make the evidence easy to inspect. I can extend these rules into the surrounding reports, dashboards, and integrations for other workflows.
+
+## Measured rates: check the denominator before quoting
 
 ```mermaid
-flowchart LR
-    C[Claim to report] --> E{Evidence path}
-    E -->|Observed records| P[Choose named population]
-    P --> R[Compute value + lineage]
-    R --> M[basis = measured]
-    M --> Q{Population fits the claim?}
-    Q -->|Yes| Y[quotable = true]
-    Q -->|No| N[quotable = false]
-    E -->|Configured assumption| V[Measured booked count × assumption]
-    V --> O[basis = modelled]
-    O --> X[quotable = false]
-    E -->|Attributed value| J{Durable attribution join?}
-    J -->|No| U[basis = unavailable<br/>value = None]
-    J -.->|Yes| A[Attribution evidence path<br/>not implemented in this public slice]
+flowchart TB
+    P["<b>Choose named population</b>"] --> D{"Denominator nonzero?"}
+    D -- No --> U["<b>Unavailable</b><br/>value = None, not quotable"]
+    D -- Yes --> R["<b>Compute rate + lineage</b><br/>basis = measured"]
+    R --> Q{"Population fits<br/>the booking-intent claim?"}
+    Q -- Yes --> Y["<b>Quotable</b><br/>booking-intent population"]
+    Q -- No --> N["<b>Not quotable for that claim</b><br/>all-call population"]
+    classDef input fill:#e8e6df,stroke:#55534a,color:#20201d,stroke-width:2px;
+    classDef pass fill:#d2e5d8,stroke:#38734d,color:#183923,stroke-width:2px;
+    classDef stop fill:#f4dadd,stroke:#b14253,color:#611c29,stroke-width:2px;
+    class P,D,R,Q input;
+    class Y pass;
+    class U,N stop;
+```
+
+## Value estimates: expose the assumption or missing evidence
+
+```mermaid
+flowchart TB
+    V["<b>Value request</b>"] --> K{"Which value?"}
+    K -- Modelled bookings --> A{"Positive finite<br/>per-booking assumption?"}
+    A -- Yes --> M["<b>Modelled value</b><br/>booked count × assumption<br/>not quotable"]
+    A -- No --> U["<b>Unavailable</b><br/>value = None, not quotable"]
+    K -- Attributed recovered revenue --> J["<b>No durable attribution join</b><br/>in this sample"]
+    J --> U
+    classDef input fill:#e8e6df,stroke:#55534a,color:#20201d,stroke-width:2px;
+    classDef stop fill:#f4dadd,stroke:#b14253,color:#611c29,stroke-width:2px;
+    class V,K,A input;
+    class M,U,J stop;
 ```
 
 ## One sample, four different claims
