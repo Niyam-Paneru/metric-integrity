@@ -1,19 +1,17 @@
 # Decisions
 
-## No bare numbers
+## Keep evidence basis separate from quote permission
 
-A `Figure` carries a value, basis, and label together.
+`measured` says the value came from observed records. `safe_to_quote` says the value supports the intended claim. The all-calls booking rate is therefore measured arithmetic but explicitly not quotable as the booking-intent success rate.
 
-## Denominator is part of the claim
+## Put denominator lineage on the figure
 
-“4 bookings out of booking-intent calls” and “4 bookings out of all calls” answer different questions.
+Rates carry their population, numerator, and denominator instead of relying on a label alone.
 
-## Modelled values can be displayed but not quoted
+## Modelled values stay modelled
 
-An assumption multiplied by a real count does not become a measurement through arithmetic.
+A configured per-booking assumption multiplied by a measured count remains a modelled estimate.
 
-## Unsupported attribution stays unavailable
+## Missing attribution is unavailable
 
-The absence of a durable join is a data limitation, not an invitation to estimate.
-
-> Before arguing about a percentage, ask what it is divided by.
+Without a durable join from the earlier call to the later booking, recovered revenue has no numeric value. The missing evidence is named in `quote_reason`.
