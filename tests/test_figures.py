@@ -1,3 +1,5 @@
+import pytest
+
 from metric_integrity import Basis, Figure
 
 
@@ -18,8 +20,13 @@ def test_rate_figure_renders_as_percentage():
 
 
 def test_unknown_display_format_is_rejected():
-    import pytest
-
     with pytest.raises(ValueError, match="unsupported_figure_display"):
         Figure(1.0, Basis.MEASURED, "Value", display="mystery")
+
+
+@pytest.mark.parametrize("value", [float("nan"), float("inf"), float("-inf")])
+@pytest.mark.parametrize("basis", [Basis.MEASURED, Basis.MODELLED])
+def test_non_finite_value_cannot_be_presented_as_a_figure(value, basis):
+    with pytest.raises(ValueError, match="non_finite_figure_value"):
+        Figure(value, basis, "Value")
 
