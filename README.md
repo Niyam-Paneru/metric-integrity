@@ -11,16 +11,25 @@ This is a public sample of reporting rules from my private voice/booking analyti
 The named denominator must be nonzero. The rate retains its calculation lineage and `measured` basis. For the booking-intent success claim, the booking-intent population is quotable; the all-call population is not.
 
 ```mermaid
-flowchart LR
-    P["<b>Population</b>"] --> D{"Nonzero?"}
-    D -- No --> U["<b>Unavailable</b><br/>None, not quotable"]
-    D -- Yes --> R["<b>Measured rate</b><br/>Keep lineage"]
+---
+config:
+  flowchart:
+    curve: linear
+    nodeSpacing: 28
+    rankSpacing: 42
+---
+flowchart TB
+    accTitle: Measured rates: check the denominator before quoting
+    accDescr: Decision flow for measured rates: check the denominator before quoting.
+    P["Population"] --> D{"Nonzero?"}
+    D -- No --> U["Unavailable<br/>None, not quotable"]
+    D -- Yes --> R["Measured rate<br/>Keep lineage"]
     R --> Q{"Booking intent?"}
-    Q -- Yes --> Y["<b>Quotable</b>"]
-    Q -- No --> N["<b>Not quotable</b><br/>For this claim"]
-    classDef input fill:#e8e6df,stroke:#55534a,color:#20201d,stroke-width:2px;
-    classDef pass fill:#d2e5d8,stroke:#38734d,color:#183923,stroke-width:2px;
-    classDef stop fill:#f4dadd,stroke:#b14253,color:#611c29,stroke-width:2px;
+    Q -- Yes --> Y["Quotable"]
+    Q -- No --> N["Not quotable<br/>For this claim"]
+    classDef input stroke-width:1.5px;
+    classDef pass stroke-width:2.5px;
+    classDef stop stroke-width:2px,stroke-dasharray:5 3;
     class P,D,R,Q input;
     class Y pass;
     class U,N stop;
@@ -31,15 +40,24 @@ flowchart LR
 Modelled value multiplies the measured booked count by a **positive, finite** configured per-booking assumption. It remains `modelled` and not quotable. Missing or invalid assumptions yield `unavailable`, with `value = None`. Attributed recovered revenue is also unavailable because this sample has no durable attribution join.
 
 ```mermaid
-flowchart LR
-    V["<b>Value request</b>"] --> K{"Which value?"}
+---
+config:
+  flowchart:
+    curve: linear
+    nodeSpacing: 28
+    rankSpacing: 42
+---
+flowchart TB
+    accTitle: Value estimates: expose the assumption or missing evidence
+    accDescr: Decision flow for value estimates: expose the assumption or missing evidence.
+    V["Value request"] --> K{"Which value?"}
     K -- Modelled --> A{"Valid assumption?"}
-    A -- Yes --> M["<b>Modelled</b><br/>Not quotable"]
-    A -- No --> U["<b>Unavailable</b><br/>None, not quotable"]
-    K -- Attributed --> J["<b>No join</b><br/>Attribution missing"]
+    A -- Yes --> M["Modelled<br/>Not quotable"]
+    A -- No --> U["Unavailable<br/>None, not quotable"]
+    K -- Attributed --> J["No join<br/>Attribution missing"]
     J --> U
-    classDef input fill:#e8e6df,stroke:#55534a,color:#20201d,stroke-width:2px;
-    classDef stop fill:#f4dadd,stroke:#b14253,color:#611c29,stroke-width:2px;
+    classDef input stroke-width:1.5px;
+    classDef stop stroke-width:2px,stroke-dasharray:5 3;
     class V,K,A input;
     class M,U,J stop;
 ```
