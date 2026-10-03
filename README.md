@@ -55,7 +55,7 @@ The demo uses **34 synthetic calls**: 14 express booking intent and 4 book. The 
 | Modelled value of booked calls | 4,800 | 4 booked calls × configured 1,200 assumption | `modelled` | No — an assumption participates in the value |
 | Recovered revenue attributed to recovered calls | not available | no durable attribution join | `unavailable` | No — the evidence required for attribution does not exist |
 
-`measured`, `modelled`, and `unavailable` describe the evidence basis. **Quotable is a separate decision.** A measured figure can still be unsafe to quote when its population does not support the intended claim.
+**Quotable is a separate decision from evidence basis:** even a measured figure can use the wrong population for the intended claim.
 
 ## Where the behavior lives
 
@@ -69,10 +69,7 @@ The demo uses **34 synthetic calls**: 14 express booking intent and 4 book. The 
 
 ## Evidence boundary
 
-- The records are synthetic; these are not customer or revenue results.
-- `measured` describes how a value was obtained. It does **not** automatically make the value safe to quote for every claim.
-- `modelled` means a configured assumption participates in the calculation.
-- `unavailable` means the required evidence is missing; it is not a low estimate in disguise.
+The records are synthetic, not customer or revenue results. `unavailable` means missing evidence, not a low estimate in disguise.
 
 Verification commands and expected checks: [docs/verification.md](docs/verification.md)
 
