@@ -34,12 +34,15 @@ def booking_rate(calls: Sequence[Call], denominator: Denominator) -> Figure:
         population = "all calls"
         quotable = False
         quote_reason = "denominator does not match the booking-intent success claim"
-    else:
+    elif denominator is Denominator.BOOKING_INTENT:
         base = booking_intent_calls(calls)
         label = "Booking rate vs calls expressing booking intent"
         population = "calls expressing booking intent"
         quotable = True
         quote_reason = None
+    else:
+        # Invalid denominators must not silently become quotable measured claims.
+        raise ValueError("unsupported_booking_rate_denominator")
 
     if base == 0:
         return Figure(
