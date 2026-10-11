@@ -4,6 +4,10 @@
 
 `booked / all_calls` is measurable arithmetic, but it does not answer the booking-intent success question. Response: carry the population and calculation on the figure and mark that claim `do not quote`.
 
+## Unsupported denominator defaults to a quotable claim
+
+An invalid denominator argument previously fell through to the booking-intent branch, presenting the result as a measured, quotable success rate. Response: accept only the two declared `Denominator` enum members and reject all other values before computing the rate.
+
 ## Modelled value presented as measured
 
 An assumption is multiplied by a real count and loses its label. Response: keep `basis=modelled` attached to the figure and block quoting it as measured.
