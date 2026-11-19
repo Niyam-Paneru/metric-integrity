@@ -19,34 +19,9 @@ There are **34 synthetic calls**. Fourteen callers wanted to book. Four booked.
 
 The arithmetic is not the problem. The sentence beside it is.
 
-## Before anybody quotes the percentage
+## Why the denominator matters
 
-This is the decision behind the table: a rate has to carry the right population before it's usable for a particular claim.
-
-```mermaid
----
-config:
-  flowchart:
-    curve: linear
-    nodeSpacing: 28
-    rankSpacing: 42
----
-flowchart TB
-    accTitle: Measured rates: check the denominator before quoting
-    accDescr: Decision flow for measured rates: check the denominator before quoting.
-    P["Population"] --> D{"Nonzero?"}
-    D -- No --> U["Unavailable<br/>None, not quotable"]
-    D -- Yes --> R["Measured rate<br/>Keep lineage"]
-    R --> Q{"Booking intent?"}
-    Q -- Yes --> Y["Quotable"]
-    Q -- No --> N["Not quotable<br/>For this claim"]
-    classDef input stroke-width:1.5px;
-    classDef pass stroke-width:2.5px;
-    classDef stop stroke-width:2px,stroke-dasharray:5 3;
-    class P,D,R,Q input;
-    class Y pass;
-    class U,N stop;
-```
+The table is the diagram here: four bookings, two valid calculations, and only one answer to the specific question. A flowchart would just repeat it with more arrows.
 
 Source to read: [rates](src/metric_integrity/rates.py), [valuation](src/metric_integrity/valuation.py), [report](src/metric_integrity/report.py), and [tests](tests/). The [verification notes](docs/verification.md) have the exact checks.
 
