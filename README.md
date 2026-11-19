@@ -1,10 +1,17 @@
 # Metric Integrity
 
-A small Python example for keeping a metric's lineage attached to the number: the population it describes, the calculation that produced it, the evidence basis, and whether the result is safe to quote.
+**Four bookings. Two success rates.** In a synthetic sample of 34 calls, 14 expressed booking intent and 4 booked: **4/14 = 28.6%** of booking-intent calls, while **4/34 = 11.8%** of all calls.
 
-**Decimal places are not a permission slip.**
+Both calculations are valid. Only one answers “what share of people trying to book succeeded?” This Python code keeps the population, calculation, evidence basis, and quote decision attached to each figure. Numbers should come with their homework.
 
-This is a public sample of reporting rules from my private voice/booking analytics work. Synthetic records make the evidence easy to inspect. I can extend these rules into the surrounding reports, dashboards, and integrations for other workflows.
+**Try it / check the behavior:**
+
+```bash
+PYTHONPATH=src python -m metric_integrity.demo
+python -m pytest
+```
+
+Synthetic records; no customer outcomes or attributable revenue claimed. [Verification](docs/verification.md).
 
 ## Measured rates: check the denominator before quoting
 
