@@ -2,11 +2,13 @@
 
 I can make a booking rate look like **28.6%** or **11.8%** without changing a single booking.
 
-No fraud required. Just change the denominator.
+No new customers. No secret marketing genius. Just a different denominator.
+
+If your dashboard ever starts looking unusually flattering, ask it to show its working. It's basically a calculator wearing a suit.
 
 A percentage can be perfectly correct and still answer a question nobody asked. I made this Python module attach the boring paperwork to every nice-looking number: the population, calculation, evidence basis, and what the claim can actually support.
 
-## Meet the tiny, suspicious dataset
+## Four bookings go on an adventure
 
 There are **34 synthetic calls**. Fourteen callers wanted to book. Four booked.
 
@@ -21,7 +23,7 @@ The arithmetic isn't the problem. The claim beside it is.
 
 ## The suspicious part
 
-The 11.8% isn't wrong. Calling it the booking-intent success rate would be. The difference is one sentence — exactly the sort of sentence that ends up very large on a slide.
+The 11.8% isn't wrong. Calling it the booking-intent success rate would be. A number doesn't have to lie; sometimes the heading volunteers.
 
 Source to read: [rates](src/metric_integrity/rates.py), [valuation](src/metric_integrity/valuation.py), [report](src/metric_integrity/report.py), and [tests](tests/). The [verification notes](docs/verification.md) have the exact checks.
 
