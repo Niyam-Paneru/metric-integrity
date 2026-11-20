@@ -1,14 +1,12 @@
 # Metric Integrity
 
-I can make a booking rate look like **28.6%** or **11.8%** without changing a single booking.
+I can take four bookings and turn **11.8%** into **28.6%** without making one extra booking. Same four appointments; the slide deck is having a great day.
 
-No new customers. No secret marketing genius. Just a different denominator.
+Both percentages can be mathematically correct. The difference is what you count.
 
-If your dashboard ever starts looking unusually flattering, ask it to show its working. It's basically a calculator wearing a suit.
+I wrote this Python module so a reported metric carries its population, calculation, evidence basis and the claim those actually justify. It makes a number show its homework.
 
-A percentage can be perfectly correct and still answer a question nobody asked. I made this Python module attach the boring paperwork to every nice-looking number: the population, calculation, evidence basis, and what the claim can actually support.
-
-## Four bookings go on an adventure
+## Four bookings, two denominators
 
 There are **34 synthetic calls**. Fourteen callers wanted to book. Four booked.
 
