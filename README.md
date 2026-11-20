@@ -4,7 +4,7 @@ I can make a booking rate look like **28.6%** or **11.8%** without changing a si
 
 No fraud required. Just change the denominator.
 
-This little Python project came out of a recurring reporting problem: a percentage can be mathematically correct and still answer the wrong question. So I made the number carry its paperwork — population, calculation, evidence basis, and whether it's safe to quote for the claim you're making.
+A percentage can be perfectly correct and still answer a question nobody asked. I made this Python module attach the boring paperwork to every nice-looking number: the population, calculation, evidence basis, and what the claim can actually support.
 
 ## Meet the tiny, suspicious dataset
 
@@ -19,9 +19,9 @@ There are **34 synthetic calls**. Fourteen callers wanted to book. Four booked.
 
 The arithmetic isn't the problem. The claim beside it is.
 
-## Why the denominator matters
+## The suspicious part
 
-Same records, two denominators, two different questions. A table makes the difference clearer than a diagram would.
+The 11.8% isn't wrong. Calling it the booking-intent success rate would be. The difference is one sentence — exactly the sort of sentence that ends up very large on a slide.
 
 Source to read: [rates](src/metric_integrity/rates.py), [valuation](src/metric_integrity/valuation.py), [report](src/metric_integrity/report.py), and [tests](tests/). The [verification notes](docs/verification.md) have the exact checks.
 
