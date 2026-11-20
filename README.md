@@ -17,11 +17,11 @@ There are **34 synthetic calls**. Fourteen callers wanted to book. Four booked.
 | "Those bookings were worth 4,800" | 4 × a configured 1,200 assumption | No — modelled, not collected revenue |
 | "We recovered X in revenue" | No attribution join | No value available |
 
-The arithmetic is not the problem. The sentence beside it is.
+The arithmetic is innocent. The headline needs questioning.
 
 ## Why the denominator matters
 
-The table is the diagram here: four bookings, two valid calculations, and only one answer to the specific question. A flowchart would just repeat it with more arrows.
+Four bookings, two valid percentages, and one misleading headline. I briefly considered a flowchart, but the denominator was already doing enough damage without arrows.
 
 Source to read: [rates](src/metric_integrity/rates.py), [valuation](src/metric_integrity/valuation.py), [report](src/metric_integrity/report.py), and [tests](tests/). The [verification notes](docs/verification.md) have the exact checks.
 
